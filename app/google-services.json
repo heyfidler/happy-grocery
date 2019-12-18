@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "729402184987",
+    "firebase_url": "https://happy-grocery.firebaseio.com",
+    "project_id": "happy-grocery",
+    "storage_bucket": "happy-grocery.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:729402184987:android:62db0c1a080ecf68142fbe",
+        "android_client_info": {
+          "package_name": "com.fidflop.happygrocery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "729402184987-spfm123ood07srr7tmcs9ipn2flm789s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtJ9tWqtBEmK9PB0O3qZj9obalvuXqTKY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "729402184987-spfm123ood07srr7tmcs9ipn2flm789s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
