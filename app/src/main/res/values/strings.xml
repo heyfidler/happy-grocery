@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Happy Grocery</string>
+    <string name="grocery_lists_title">Grocery Lists</string>
+    <string name="logout">logout</string>
+    <string name="user_info">user info</string>
+    <string name="edit_icon">Edit icon</string>
+    <string name="reorder_handle_icon">Reorder Handle icon</string>
+    <string name="swipe_direction_icon">Swipe Direction icon</string>
+    <string name="item_directions">Swipe item left to delete\nright to cross out\nLong press to drag and drop</string>
+    <string name="item_delete_confirm">delete list item?</string>
+    <string name="grocery_list_delete_confirm">delete grocery list?</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
 </resources>
