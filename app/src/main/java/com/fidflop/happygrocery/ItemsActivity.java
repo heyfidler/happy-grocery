@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,10 +28,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Objects;
 
 import github.nisrulz.recyclerviewhelper.RVHItemDividerDecoration;
 import github.nisrulz.recyclerviewhelper.RVHItemTouchHelperCallback;
@@ -40,9 +40,8 @@ public class ItemsActivity extends AppCompatActivity {
     private RecyclerView itemsRV;
     private ItemsAdapter adapter;
     private FirebaseUser user;
-    private static final String TAG = "ItemsActivity";
-    GroceryList groceryList;
-    String path;
+    private GroceryList groceryList;
+    private String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +54,7 @@ public class ItemsActivity extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
 
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(groceryList.getName());
 
@@ -77,6 +76,15 @@ public class ItemsActivity extends AppCompatActivity {
                         .show();
             }
         });
+
+        //widget
+        Intent intent = new Intent(this, HappyGroceryWidget.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getApplication());
+        int[] ids = appWidgetManager.getAppWidgetIds(new ComponentName(getApplication(), HappyGroceryWidget.class));
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+        intent.putExtra("groceryList", groceryList);
+        sendBroadcast(intent);
     }
 
     private void updateGroceryList() {
@@ -97,10 +105,9 @@ public class ItemsActivity extends AppCompatActivity {
     public void onStop() {
         super.onStop();
         updateGroceryList();
-        Log.i(TAG, "++ ON STOP ++");
     }
 
-    public void setupRV() {
+    private void setupRV() {
         adapter = new ItemsAdapter(this, groceryList.getGroceryItems());
         itemsRV.setLayoutManager(new LinearLayoutManager(this));
         itemsRV.setAdapter(adapter);

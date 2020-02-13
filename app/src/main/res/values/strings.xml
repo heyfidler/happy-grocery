@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Happy Grocery</string>
-    <string name="grocery_lists_title">Grocery Lists</string>
     <string name="logout">logout</string>
     <string name="user_info">user info</string>
     <string name="edit_icon">Edit icon</string>
@@ -11,4 +10,6 @@
     <string name="grocery_list_delete_confirm">delete grocery list?</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
+    <string name="widget_no_list_chosen">No List Chosen</string>
+    <string name="build_dummy_list">build dummy list</string>
 </resources>

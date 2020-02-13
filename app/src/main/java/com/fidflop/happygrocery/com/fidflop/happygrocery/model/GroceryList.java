@@ -11,8 +11,9 @@ public class GroceryList implements Parcelable {
     private String name;
     private boolean current;
     private List<GroceryItem> groceryItems;
-    private Date creationDate;
+    private final Date creationDate;
 
+    @SuppressWarnings("unused")
     public Date getCreationDate() {
         return creationDate;
     }
@@ -27,14 +28,6 @@ public class GroceryList implements Parcelable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public boolean isCurrent() {
-        return current;
-    }
-
-    public void setCurrent(boolean current) {
-        this.current = current;
     }
 
     public List<GroceryItem> getGroceryItems() {
@@ -88,4 +81,19 @@ public class GroceryList implements Parcelable {
             return new GroceryList[size];
         }
     };
+
+    public static GroceryList buildDummyGroceryList() {
+        GroceryList groceryList = new GroceryList();
+        groceryList.setName("List for Sat Picnic");
+
+        List<GroceryItem> itemList = new ArrayList<>();
+        itemList.add(new GroceryItem("bottle of wine"));
+        itemList.add(new GroceryItem("baguette"));
+        itemList.add(new GroceryItem("gouda cheese"));
+        itemList.add(new GroceryItem("green grapes"));
+        itemList.add(new GroceryItem("sparkling water"));
+        itemList.add(new GroceryItem("napkins"));
+        groceryList.setGroceryItems(itemList);
+        return groceryList;
+    }
 }

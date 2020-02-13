@@ -6,4 +6,7 @@
     <item
         android:id="@+id/logout"
         android:title="@string/logout" />
+    <item
+        android:id="@+id/build_list"
+        android:title="@string/build_dummy_list" />
 </menu>

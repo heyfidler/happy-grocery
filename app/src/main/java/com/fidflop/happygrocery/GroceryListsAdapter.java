@@ -41,12 +41,12 @@ import java.util.List;
 public class GroceryListsAdapter extends RecyclerView.Adapter<GroceryListsAdapter.GroceryListViewHolder>
         implements RVHAdapter, EventListener<QuerySnapshot> {
 
-    private List<DocumentSnapshot> mSnapshots = new ArrayList<>();
+    private final List<DocumentSnapshot> mSnapshots = new ArrayList<>();
     private static final String TAG = "GroceryListsAdapter";
-    private Query mQuery;
+    private final Query mQuery;
     private ListenerRegistration mRegistration;
-    private CollectionReference groceryListsCollectionReference;
-    private Context context;
+    private final CollectionReference groceryListsCollectionReference;
+    private final Context context;
 
     public class GroceryListViewHolder extends RecyclerView.ViewHolder implements RVHViewHolder {
 
@@ -104,11 +104,17 @@ public class GroceryListsAdapter extends RecyclerView.Adapter<GroceryListsAdapte
             editTxt.setVisibility(View.VISIBLE);
             editTxt.requestFocus();
             txt.setVisibility(View.GONE);
+            showKeyboard();
         }
 
         private void hideKeyboard() {
             InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(editTxt.getWindowToken(),0);
+        }
+
+        private void showKeyboard() {
+            InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
         }
 
         @Override
@@ -117,7 +123,7 @@ public class GroceryListsAdapter extends RecyclerView.Adapter<GroceryListsAdapte
         }
 
         @Override
-        public void onItemSelected(int actionstate) {
+        public void onItemSelected(int actionState) {
             System.out.println("Item is selected");
         }
     }
@@ -255,7 +261,7 @@ public class GroceryListsAdapter extends RecyclerView.Adapter<GroceryListsAdapte
 
     private void swap(int firstPosition, int secondPosition) {
         Collections.swap(mSnapshots, firstPosition, secondPosition);
-        notifyItemMoved(firstPosition, secondPosition);
+        notifyDataSetChanged();
     }
 
     private void startListening() {

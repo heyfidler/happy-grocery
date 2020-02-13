@@ -66,7 +66,7 @@ public class GroceryListsActivity extends AppCompatActivity {
 
     }
 
-    public void setupRV() {
+    private void setupRV() {
         adapter = new GroceryListsAdapter(user, this);
         groceryListRV.setLayoutManager(new LinearLayoutManager(this));
         groceryListRV.setAdapter(adapter);
@@ -127,6 +127,9 @@ public class GroceryListsActivity extends AppCompatActivity {
                             }
                         });
                 alertDialog.show();
+                break;
+            case R.id.build_list:
+                adapter.add(GroceryList.buildDummyGroceryList());
                 break;
             default:
                 break;

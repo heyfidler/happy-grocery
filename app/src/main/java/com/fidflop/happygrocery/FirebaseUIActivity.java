@@ -26,7 +26,7 @@ public class FirebaseUIActivity extends AppCompatActivity {
         createSignInIntent();
     }
 
-    public void createSignInIntent() {
+    private void createSignInIntent() {
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),
                 new AuthUI.IdpConfig.PhoneBuilder().build(),
@@ -38,7 +38,6 @@ public class FirebaseUIActivity extends AppCompatActivity {
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
                         .setAvailableProviders(providers)
-                        .setLogo(R.drawable.my_great_logo)
                         .setTheme(R.style.AppTheme)
                         .build(),
                 RC_SIGN_IN);

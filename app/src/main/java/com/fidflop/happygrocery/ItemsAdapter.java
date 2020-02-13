@@ -3,7 +3,6 @@ package com.fidflop.happygrocery;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +21,7 @@ import com.fidflop.happygrocery.com.fidflop.happygrocery.model.GroceryItem;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import github.nisrulz.recyclerviewhelper.RVHAdapter;
 import github.nisrulz.recyclerviewhelper.RVHViewHolder;
@@ -29,9 +29,8 @@ import github.nisrulz.recyclerviewhelper.RVHViewHolder;
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder>
         implements RVHAdapter {
 
-    private List<GroceryItem> items;
-    private static final String TAG = "ItemsAdapter";
-    private Context context;
+    private final List<GroceryItem> items;
+    private final Context context;
 
     public class ItemViewHolder extends RecyclerView.ViewHolder implements RVHViewHolder {
         final TextView txt;
@@ -71,7 +70,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
             if (groceryItem != null && txt != null && txt.getText() != null && groceryItem.isStrikeout()) {
                 txt.setPaintFlags(txt.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             } else {
-                txt.setPaintFlags(0);
+                Objects.requireNonNull(txt).setPaintFlags(0);
             }
         }
 
@@ -95,6 +94,12 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
             editTxt.setVisibility(View.VISIBLE);
             editTxt.requestFocus();
             txt.setVisibility(View.GONE);
+            showKeyboard();
+        }
+
+        private void showKeyboard() {
+            InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
         }
 
         private void hideKeyboard() {
@@ -107,7 +112,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
         }
 
         @Override
-        public void onItemSelected(int actionstate) {
+        public void onItemSelected(int actionState) {
         }
     }
 

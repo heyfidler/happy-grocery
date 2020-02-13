@@ -7,8 +7,7 @@ import java.util.Date;
 
 public class GroceryItem implements Parcelable {
     private String name;
-    private Date creationDate;
-    private int quantity;
+    final private Date creationDate;
     private boolean strikeout;
 
     public String getName() {
@@ -19,15 +18,12 @@ public class GroceryItem implements Parcelable {
         this.name = name;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public GroceryItem(){
+        creationDate = new Date();
+    }
+
+    GroceryItem(String name){
+        this.name = name;
         creationDate = new Date();
     }
 
@@ -39,17 +35,10 @@ public class GroceryItem implements Parcelable {
         this.strikeout = strikeout;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-
-
-    protected GroceryItem(Parcel in) {
+    private GroceryItem(Parcel in) {
         name = in.readString();
         long tmpCreationDate = in.readLong();
         creationDate = tmpCreationDate != -1 ? new Date(tmpCreationDate) : null;
-        quantity = in.readInt();
         strikeout = in.readByte() != 0x00;
     }
 
@@ -62,7 +51,6 @@ public class GroceryItem implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeLong(creationDate != null ? creationDate.getTime() : -1L);
-        dest.writeInt(quantity);
         dest.writeByte((byte) (strikeout ? 0x01 : 0x00));
     }
 
